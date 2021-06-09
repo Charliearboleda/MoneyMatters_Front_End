@@ -29,7 +29,7 @@ const Register = () => {
           })
 
           const parseResponse = await response.json()
-          localStorage.setItem("token", parseResponse.json())
+          localStorage.setItem("token", parseResponse)
       } catch (err) {
             console.error(err.message)
       }
