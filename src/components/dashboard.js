@@ -29,9 +29,9 @@ const Dashboard = ({setAuth}) => {
             method:"GET",
             headers: {token: localStorage.token}
         })
-        console.log(response)
+
         const parseResponse = await response.json()
-        console.log(parseResponse)
+
         setBalance(parseResponse.account_balance)
 
         } catch (err) {
@@ -39,6 +39,11 @@ const Dashboard = ({setAuth}) => {
         }
     }
 
+const logout = (e) => {
+    e.preventDefault()
+    localStorage.removeItem("token")
+    setAuth(false)
+}
 
 useEffect(() => {
     getName()
@@ -50,6 +55,7 @@ useEffect(() => {
         <Fragment>
         <h1>Dashboard {name}</h1>
         <h2>balance ${balance}</h2>
+        <button className="btn btn-primary" onClick={e => logout(e)}>Log Out</button>
 
         </Fragment>
     )
