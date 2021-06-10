@@ -1,6 +1,9 @@
 import React, { Fragment, useState, useEffect } from "react"
 
 const Dashboard = ({setAuth}) => {
+    const [inputs, setInputs] = useState({
+        account_balance: "",
+    })
 
     const [name, setName] = useState("")
     const [balance, setBalance] = useState("")
