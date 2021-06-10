@@ -15,9 +15,9 @@ const Dashboard = ({setAuth}) => {
             method:"GET",
             headers: {token: localStorage.token}
         })
-        console.log(response)
+
         const parseResponse = await response.json()
-        console.log(parseResponse)
+        
         setName(parseResponse.user_name)
 
         } catch (err) {
@@ -51,7 +51,7 @@ const logout = (e) => {
 useEffect(() => {
     getName()
     getBalance()
-})
+},[])
 
 
     return (
