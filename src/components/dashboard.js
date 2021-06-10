@@ -1,15 +1,29 @@
 import React, { Fragment, useState, useEffect } from "react"
 
 const Dashboard = ({setAuth}) => {
-    const [inputs, setInputs] = useState({
-        account_balance: "",
+    // const [inputs, setInputs] = useState({
+    //     account_balance: "",
+    // })
+    //
+    // const [name, setName] = useState("")
+    // const [balance, setBalance] = useState("")
+    const [currentUser, setCurrentUser] = useState({
+        user_id: "",
+        user_name: "",
+        user_email: "",
+        user_password: "",
+        account_balance: ""
     })
 
-    const [name, setName] = useState("")
-    const [balance, setBalance] = useState("")
+    const [formInfo, setFormInfo] = useState({
+        user_id: "",
+        user_name: "",
+        user_email: "",
+        user_password: "",
+        account_balance: ""
+    })
 
-    async function getName() {
-
+    async function getUser() {
         try {
         const response = await fetch("https://moneymattersbackend.herokuapp.com/dashboard", {
             method:"GET",
@@ -17,30 +31,42 @@ const Dashboard = ({setAuth}) => {
         })
 
         const parseResponse = await response.json()
-        
-        setName(parseResponse.user_name)
-
+        setCurrentUser(parseResponse)
+        setFormInfo(parseResponse)
+        // setName(parseResponse.user_name)
+        // setBalance(parseResponse.account_balance)
         } catch (err) {
             console.error(err.message)
         }
     }
 
-    async function getBalance() {
+const updateBalance = async(e) => {
+    e.preventDefault()
 
-        try {
-        const response = await fetch("https://moneymattersbackend.herokuapp.com/dashboard", {
-            method:"GET",
-            headers: {token: localStorage.token}
+    try {
+        await setFormInfo({
+            ...formInfo,
+            account_balance: parseInt(currentUser.account_balance)
         })
+        const id = currentUser.user_id
 
-        const parseResponse = await response.json()
-
-        setBalance(parseResponse.account_balance)
-
-        } catch (err) {
-            console.error(err.message)
-        }
+        console.log(JSON.stringify(formInfo))
+        const response = await fetch(`https://moneymattersbackend.herokuapp.com/auth/${id}`, {
+            method: "PUT",
+            headers: {token: localStorage.token,"Content-Type" : "application/json"},
+            body:JSON.stringify(formInfo)
+        })
+    } catch (err) {
+    console.error(err.message)
     }
+}
+
+const handleChange = (e) => {
+    setFormInfo({
+        ...formInfo,
+        [e.target.name]: e.target.value
+    })
+}
 
 const logout = (e) => {
     e.preventDefault()
@@ -49,16 +75,23 @@ const logout = (e) => {
 }
 
 useEffect(() => {
-    getName()
-    getBalance()
+
+    getUser()
+    // getBalance()
 },[])
 
 
     return (
         <Fragment>
-        <h1>Dashboard {name}</h1>
-        <h2>balance ${balance}</h2>
-        <button className="btn btn-primary" onClick={e => logout(e)}>Log Out</button>
+        <h1>Dashboard {currentUser.user_name}</h1>
+        <h2>balance ${currentUser.account_balance}</h2>
+
+        <form onSubmit={updateBalance} name={currentUser.user_id}>
+        <input type="number" name="account_balance"  onChange={handleChange} />
+        <input type="submit" onClick={updateBalance} />
+
+        </form>
+        <button className="btn btn-primary" onClick={logout}>Log Out</button>
 
         </Fragment>
     )
