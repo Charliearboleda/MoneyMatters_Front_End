@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react"
 
 const Dashboard = ({setAuth}) => {
+
     // const [inputs, setInputs] = useState({
     //     account_balance: "",
     // })
@@ -40,9 +41,13 @@ const Dashboard = ({setAuth}) => {
         }
     }
 
+    const refresh = async() => {
+        await window.location.reload()
+    }
+
 const updateBalance = async(e) => {
     e.preventDefault()
-
+        window.location.reload(false)
     try {
         await setFormInfo({
             ...formInfo,
@@ -55,7 +60,7 @@ const updateBalance = async(e) => {
             method: "PUT",
             headers: {token: localStorage.token,"Content-Type" : "application/json"},
             body:JSON.stringify(formInfo)
-        })
+        }, await refresh())
     } catch (err) {
     console.error(err.message)
     }
@@ -76,6 +81,7 @@ const logout = (e) => {
 
 useEffect(() => {
     getUser()
+
 
 },[])
 
