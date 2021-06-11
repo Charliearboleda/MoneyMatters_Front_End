@@ -75,23 +75,32 @@ const logout = (e) => {
 }
 
 useEffect(() => {
-
     getUser()
-    // getBalance()
+
 },[])
 
 
     return (
         <Fragment>
-        <h1>Dashboard {currentUser.user_name}</h1>
-        <h2>balance ${currentUser.account_balance}</h2>
+        <div className="button">
+        <button className="btn btn-primary " onClick={logout}>Log Out</button>
+        </div>
+        <div className="header">
+        <h1>Welcome, {currentUser.user_name}</h1>
+        </div>
+
+
+        <div className="account">
+
+
+        <h3>Your Account Balance Is ${currentUser.account_balance}</h3>
 
         <form onSubmit={updateBalance} name={currentUser.user_id}>
         <input type="number" name="account_balance"  onChange={handleChange} />
-        <input type="submit" onClick={updateBalance} />
+        <input className="submit"type="submit" onClick={updateBalance} />
 
         </form>
-        <button className="btn btn-primary" onClick={logout}>Log Out</button>
+        </div>
 
         </Fragment>
     )
