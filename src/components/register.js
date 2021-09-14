@@ -21,7 +21,7 @@ const Register = ({setAuth}) => {
       try {
           const body = {user_name, user_email, user_password, account_balance }
 
-          const response = await fetch("https://money-managment-nyc.herokuapp.com/auth/register", {
+          const response = await fetch("https://sharp-torvalds-d6526b.netlify.app/auth/register", {
               method: "POST",
               headers:{"Content-Type" : "application/json"}
               ,

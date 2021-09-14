@@ -26,7 +26,7 @@ const Dashboard = ({setAuth}) => {
 
     async function getUser() {
         try {
-        const response = await fetch("https://money-managment-nyc.herokuapp.com/dashboard", {
+        const response = await fetch("https://sharp-torvalds-d6526b.netlify.app/dashboard", {
             method:"GET",
             headers: {token: localStorage.token}
         })
@@ -52,7 +52,7 @@ const updateBalance = async(e) => {
         const id = currentUser.user_id
 
         console.log(JSON.stringify(formInfo))
-        const response = await fetch(`https://money-managment-nyc.herokuapp.com/auth/${id}`, {
+        const response = await fetch(`https://sharp-torvalds-d6526b.netlify.app/auth/${id}`, {
             method: "PUT",
             headers: {token: localStorage.token,"Content-Type" : "application/json"},
             body:JSON.stringify(formInfo)
