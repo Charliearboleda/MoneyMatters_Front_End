@@ -52,11 +52,11 @@ const updateBalance = async(e) => {
         const id = currentUser.user_id
 
         console.log(JSON.stringify(formInfo))
-        const response = await fetch(`https://moneymattersbackend.herokuapp.com/auth/${id}`, {
+        const response = await fetch(`https://money-managment-nyc.herokuapp.com/auth/${id}`, {
             method: "PUT",
             headers: {token: localStorage.token,"Content-Type" : "application/json"},
             body:JSON.stringify(formInfo)
-            
+
         })
     } catch (err) {
     console.error(err.message)

@@ -17,7 +17,7 @@ function App() {
 
     async function isAuth() {
         try {
-            const response = await fetch("https://moneymattersbackend.herokuapp.com/auth/is-verify", {
+            const response = await fetch("https://money-managment-nyc.herokuapp.com/auth/is-verify", {
                 method: "GET",
                 headers: {token: localStorage.token}
             })
