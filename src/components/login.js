@@ -16,7 +16,7 @@ const Login = ({setAuth}) => {
         e.preventDefault()
         try {
             const body = {user_email, user_password}
-            const response = await fetch("https://sharp-torvalds-d6526b.netlify.app/auth/login", {
+            const response = await fetch("https://money-managment-nyc.herokuapp.com/auth/login", {
                 method:"POST",
                 headers: {"Content-Type" : "application/json"}
                 ,
