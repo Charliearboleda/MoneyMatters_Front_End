@@ -26,7 +26,7 @@ const Dashboard = ({setAuth}) => {
 
     async function getUser() {
         try {
-        const response = await fetch("https://moneymattersbackend.herokuapp.com/dashboard", {
+        const response = await fetch("https://money-managment-nyc.herokuapp.com/dashboard", {
             method:"GET",
             headers: {token: localStorage.token}
         })
