@@ -17,7 +17,7 @@ function App() {
 
     async function isAuth() {
         try {
-            const response = await fetch("https://sharp-torvalds-d6526b.netlify.app/auth/is-verify", {
+            const response = await fetch("https://sharp-torvalds-d6526b.netlify.app/", {
                 method: "GET",
                 headers: {token: localStorage.token}
             })
